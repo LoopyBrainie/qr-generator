@@ -1,0 +1,216 @@
+/* 基础样式重置 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: #f5f7fa;
+  color: #333;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* 标题样式 */
+header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 20px 0;
+  border-bottom: 1px solid #e1e4e8;
+}
+
+h1 {
+  color: #2c3e50;
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  color: #7f8c8d;
+  font-size: 1.1rem;
+}
+
+h2 {
+  color: #3498db;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+h3 {
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+/* 卡片样式 */
+.card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+  margin-bottom: 25px;
+}
+
+/* 表单样式 */
+.form-section, .result-section {
+  margin-bottom: 30px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #34495e;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+input[type="text"]:focus {
+  border-color: #3498db;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+/* 按钮样式 */
+.form-actions {
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+.primary-btn {
+  background-color: #3498db;
+  color: white;
+}
+
+.primary-btn:hover {
+  background-color: #2980b9;
+}
+
+.secondary-btn {
+  background-color: #e9ecef;
+  color: #495057;
+}
+
+.secondary-btn:hover {
+  background-color: #dee2e6;
+}
+
+/* 二维码区域 */
+.qr-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+#qrcode {
+  width: 256px;
+  height: 256px;
+  margin: 0 auto 15px;
+  padding: 10px;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.update-time {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+/* 签到码文本 */
+.code-details {
+  margin-top: 20px;
+}
+
+.qr-text {
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  font-family: monospace;
+  word-break: break-all;
+  font-size: 0.9rem;
+  border: 1px solid #e9ecef;
+  color: #495057;
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+/* 自动更新选项 */
+.auto-update {
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.auto-update input {
+  margin-right: 8px;
+}
+
+/* 页脚 */
+footer {
+  text-align: center;
+  margin-top: 40px;
+  padding-top: 20px;
+  color: #7f8c8d;
+  border-top: 1px solid #e1e4e8;
+}
+
+/* 响应式设计 */
+@media (min-width: 768px) {
+  main {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .form-section, .result-section {
+    flex: 1;
+  }
+}
+
+@media (max-width: 767px) {
+  h1 {
+    font-size: 2rem;
+  }
+  
+  .card {
+    padding: 20px;
+  }
+  
+  button {
+    padding: 10px 20px;
+  }
+}
