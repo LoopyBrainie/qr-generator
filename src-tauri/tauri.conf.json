@@ -19,6 +19,7 @@
     },
     "bundle": {
       "active": true,
+      "identifier": "com.loopybrainie.qrgenerator",
       "icon": [
         "icons/32x32.png",
         "icons/128x128.png",
@@ -26,8 +27,11 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.qr-generator.dev",
-      "targets": "all"
+      "windows": {
+        "wix": {
+          "language": "zh-CN"
+        }
+      }
     },
     "security": {
       "csp": null

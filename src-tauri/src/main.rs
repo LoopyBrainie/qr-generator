@@ -4,12 +4,12 @@
 )]
 
 use tauri::command;
-use chrono::{DateTime, Utc};
+use chrono::{DateTime, Local};
 
 #[command]
 fn generate_qr_code(id: String, site_id: String, class_lesson_id: String) -> String {
-    // 获取当前时间
-    let now: DateTime<Utc> = Utc::now();
+    // 获取当前本地时间
+    let now: DateTime<Local> = Local::now();
     // 格式化为ISO 8601格式
     let create_time = now.to_rfc3339();
     

@@ -86,8 +86,16 @@ document.addEventListener("DOMContentLoaded", function() {
       // 保存当前输入
       saveInputValues();
       
-      // 生成签到码文本
-      const timestamp = new Date().toISOString();
+      // 生成签到码文本 - 不包含时区信息
+      const now = new Date();
+      const timestamp = now.getFullYear() + '-' +
+                        String(now.getMonth() + 1).padStart(2, '0') + '-' +
+                        String(now.getDate()).padStart(2, '0') + 'T' +
+                        String(now.getHours()).padStart(2, '0') + ':' +
+                        String(now.getMinutes()).padStart(2, '0') + ':' +
+                        String(now.getSeconds()).padStart(2, '0') + '.' +
+                        String(now.getMilliseconds()).padStart(3, '0');
+      
       const qrText = `checkwork|id=${userId}&siteId=${siteId}&createTime=${timestamp}&classLessonId=${classLessonId}`;
       
       // 显示签到码文本
