@@ -1,7 +1,7 @@
 {
   "name": "qr-generator",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.1.2",
   "type": "module",
   "description": "签到码生成器应用",
   "scripts": {
