@@ -1,4 +1,0 @@
-<Component Id="UsageDeclarationFiles" Guid="PUT-GUID-HERE">
-  <File Source="..\Software_Usage_Declaration.html" />
-  <File Source="..\Software_Usage_Declaration_zh.html" />
-</Component>

@@ -32,7 +32,6 @@
       ],
       "windows": {
         "wix": {
-          "fragmentPaths": ["src-tauri/installer.wxs"],
           "language": "zh-CN"
         }
       }
