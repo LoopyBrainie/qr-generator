@@ -27,8 +27,10 @@
         "icons/icon.ico"
       ],
       "resources": [
-      "../Software_Usage_Declaration.html",
-      "../Software_Usage_Declaration_zh.html"
+        "../LICENSE",
+        "../README.md",
+        "../Software_Usage_Declaration.html",
+        "../Software_Usage_Declaration_zh.html"
       ],
       "windows": {
         "wix": {
