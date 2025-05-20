@@ -64,9 +64,73 @@
       </section>
     </main>
 
-    <footer>
-      <p>使用该软件意味着同意<a href="./_up_/Software_Usage_Declaration_zh.html">软件协议</a></p>
-      <p><a href="./_up_/LICENSE">Copyright</a> LoopyBrainie@Brra1n0</p>
+    <!-- 模态对话框 -->
+    <div id="modalOverlay" class="modal-overlay">
+      <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <div id="modalBody"></div>
+      </div>
+    </div>
+
+    <!-- 软件使用声明内容 -->
+    <template id="declarationContent">
+      <div class="declaration-content">
+        <h1>软件使用声明</h1>
+        <h2>一、声明目的</h2>
+        <p>本声明旨在明确本软件（以下简称"软件"）的使用范围、目的以及使用者的责任和义务，确保软件的使用符合法律法规和道德规范。</p>
+        
+        <h2>二、软件用途</h2>
+        <p>1. <strong>学习与开发用途</strong><br>
+        本软件仅供学习和开发目的使用。其设计初衷是为了帮助用户了解和探索相关技术原理，提升技术能力，以及进行合法合规的开发实践。</p>
+        
+        <p>2. <strong>禁止非法用途</strong><br>
+        本软件不得用于任何违反法律法规、侵犯他人合法权益或违背道德准则的行为。包括但不限于：</p>
+        <ul>
+          <li>未经授权访问或篡改计算机系统、网络资源或数据。</li>
+          <li>伪造或篡改签到码、二维码或其他验证信息。</li>
+          <li>用于任何形式的作弊、欺诈或不正当竞争行为。</li>
+          <li>侵犯他人隐私、知识产权或其他合法权益。</li>
+        </ul>
+        
+        <h2>三、使用者责任</h2>
+        <p>1. <strong>合法合规使用</strong><br>
+        使用者必须确保其使用本软件的行为完全符合当地及国际法律法规。使用者应自行承担因使用本软件而可能产生的任何法律后果。</p>
+        
+        <p>2. <strong>责任归属</strong><br>
+        使用者对本软件的使用负有完全责任。任何因使用本软件而导致的直接或间接损失、损害或法律责任，均由使用者自行承担。软件开发者不对使用者的行为及其后果承担任何责任。</p>
+        
+        <p>3. <strong>遵守道德规范</strong><br>
+        使用者应遵守社会公德和道德规范，不得将本软件用于任何可能损害他人利益或社会公共利益的行为。</p>
+      </div>
+    </template>
+
+    <!-- MIT许可证内容 -->
+    <template id="licenseContent">
+      <div class="license-content">
+        <h1>MIT License</h1>
+        <p>Copyright (c) 2025 LoopyBrainie@Brra1n0</p>
+        <p>Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:</p>
+        
+        <p>The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.</p>
+        
+        <p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.</p>
+      </div>
+    </template>
+      <footer>
+      <p>使用该软件意味着同意<a href="#" id="showDeclaration">软件协议</a></p>
+      <p><a href="#" id="showLicense">Copyright</a> LoopyBrainie@Brra1n0</p>
     </footer>
   </div>
 

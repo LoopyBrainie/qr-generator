@@ -195,4 +195,46 @@ document.addEventListener("DOMContentLoaded", function() {
     
     console.log("表单已清除");
   }
+  
+  // 模态对话框相关功能
+  const modalOverlay = document.getElementById('modalOverlay');
+  const modalBody = document.getElementById('modalBody');
+  const closeButton = document.querySelector('.close-button');
+  const declarationTemplate = document.getElementById('declarationContent');
+  const licenseTemplate = document.getElementById('licenseContent');
+  
+  // 显示软件声明
+  document.getElementById('showDeclaration').addEventListener('click', (e) => {
+    e.preventDefault();
+    modalBody.innerHTML = '';
+    modalBody.appendChild(declarationTemplate.content.cloneNode(true));
+    modalOverlay.style.display = 'block';
+  });
+  
+  // 显示许可证
+  document.getElementById('showLicense').addEventListener('click', (e) => {
+    e.preventDefault();
+    modalBody.innerHTML = '';
+    modalBody.appendChild(licenseTemplate.content.cloneNode(true));
+    modalOverlay.style.display = 'block';
+  });
+  
+  // 关闭模态对话框
+  closeButton.addEventListener('click', () => {
+    modalOverlay.style.display = 'none';
+  });
+  
+  // 点击对话框外部区域关闭
+  modalOverlay.addEventListener('click', (e) => {
+    if (e.target === modalOverlay) {
+      modalOverlay.style.display = 'none';
+    }
+  });
+  
+  // ESC键关闭对话框
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modalOverlay.style.display === 'block') {
+      modalOverlay.style.display = 'none';
+    }
+  });
 });

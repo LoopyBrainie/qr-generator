@@ -1,6 +1,6 @@
-# QR Code Generator
+# Sign-up QR Code Generator
 
-A desktop application built with Tauri that generates QR codes. This lightweight and fast app allows you to create QR codes from text or URLs.
+A desktop application [*(github pages)*](https://github.com/LoopyBrainie/qr-generator/)  built with Tauri that generates sign-up codes. This lightweight and fast app allows you to create sign-up code. 
 
 ## ✨ Features
 
@@ -16,19 +16,27 @@ Download the latest release from the [GitHub Releases page](https://github.com/L
 ## 🛠️ Locally Build
 
 1. Install dependencies:
-    ```bash
-    npm install
-    ```
+   
+   ```bash
+   npm install
+   ```
 
 2. Run development server:
-    ```bash
-    npm run tauri dev
-    ```
+   
+   ```bash
+   npm run tauri dev
+   ```
 
 3. Build for production:
-    ```bash
-    npm run tauri build
-    ```
+   
+   ```bash
+   npm run tauri build
+   ```
+
+## 📜 Software Usage Declaration
+
+- [Software Usage Declaration](https://loopybrainie.github.io/qr-generator/Software_Usage_Declaration.html) 
+- [软件使用协议](https://loopybrainie.github.io/qr-generator/Software_Usage_Declaration_zh.html )
 
 ## 🔧 Recommended IDE Setup
 
