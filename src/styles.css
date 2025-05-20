@@ -246,6 +246,28 @@ button:hover {
   margin-bottom: 15px;
 }
 
+/* 声明页脚样式 */
+.declaration-content .footer {
+  text-align: center;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+  color: #666;
+}
+
+.declaration-content .footer p {
+  margin: 5px 0;
+}
+
+.declaration-content .footer a {
+  color: #4CAF50;
+  text-decoration: none;
+}
+
+.declaration-content .footer a:hover {
+  text-decoration: underline;
+}
+
 /* 页脚 */
 footer {
   text-align: center;
