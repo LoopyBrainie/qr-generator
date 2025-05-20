@@ -33,10 +33,11 @@ Download the latest release from the [GitHub Releases page](https://github.com/L
    npm run tauri build
    ```
 
-## 📜 Software Usage Declaration
+## 📜 Software Usage Declaration & LICENSE
 
 - [Software Usage Declaration](https://loopybrainie.github.io/qr-generator/Software_Usage_Declaration.html) 
 - [软件使用协议](https://loopybrainie.github.io/qr-generator/Software_Usage_Declaration_zh.html )
+- [LICENSE](https://github.com/LoopyBrainie/qr-generator/blob/master/LICENSE)
 
 ## 🔧 Recommended IDE Setup
 
