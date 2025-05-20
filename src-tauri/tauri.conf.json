@@ -27,7 +27,11 @@
         "icons/icon.ico"
       ],
       "windows": {
+        "nsis":{
+          "include":"src-tauri/installer.nsh",
+        },
         "wix": {
+          "fragmentPaths": ["src-tauri/installer.wxs"],
           "language": "zh-CN"
         }
       }
