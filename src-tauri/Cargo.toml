@@ -1,6 +1,6 @@
 [package]
 name = "qr-generator"
-version = "1.0.1"
+version = "1.0.2"
 description = "签到码生成器"
 authors = ["LoopyBrainie@Brra1n0"]
 license = "../LICENSE"
