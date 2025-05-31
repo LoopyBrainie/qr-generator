@@ -219,38 +219,66 @@ button:hover {
   color: #000;
 }
 
-.declaration-content,
-.license-content {
-  line-height: 1.6;
+/* 声明内容样式（与MIT License页面统一，参考friendly.css） */
+.declaration-content {
+  max-width: 877px;
+  margin: 2em auto 1.5em auto;
+  background: #f7f7f7;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  padding: 2.5em 2em 2em 2em;
+  font-family: 'Lato', Helvetica, Arial, sans-serif;
   color: #333;
+  text-align: center;
+  position: relative;
 }
 
-.declaration-content h1,
-.license-content h1 {
-  color: #2c3e50;
-  margin-bottom: 20px;
+.declaration-content h1 {
+  font-size: 2.2em;
+  font-weight: 300;
+  text-transform: uppercase;
+  display: inline-block;
+  padding-bottom: 12px;
+  border-bottom: 2px dashed #d9d9d9;
+  margin: 0 0 1.5em 0;
+  letter-spacing: 1px;
 }
 
 .declaration-content h2 {
   color: #4CAF50;
-  margin-top: 20px;
+  margin-top: 1.5em;
+  margin-bottom: 0.8em;
+  font-size: 1.25em;
+  font-weight: 400;
 }
 
 .declaration-content ul {
-  margin-left: 20px;
-  margin-bottom: 15px;
+  margin-left: 1.5em;
+  margin-bottom: 1.2em;
+  text-align: left;
 }
 
-.declaration-content p,
-.license-content p {
-  margin-bottom: 15px;
+.declaration-content p {
+  text-align: left;
+  margin: 1.2em 0;
+  font-size: 1.08em;
+}
+
+.declaration-content p:first-of-type {
+  text-align: center;
+  font-size: 0.95em;
+}
+
+.declaration-content p:last-of-type {
+  border-left: 3px solid #333;
+  padding-left: 15px;
 }
 
 /* 声明页脚样式 */
 .declaration-content .footer {
   text-align: center;
-  margin-top: 30px;
-  padding-top: 20px;
+  margin-top: 2.5em;
+  padding-top: 1.5em;
   border-top: 1px solid #eee;
   color: #666;
 }
@@ -260,12 +288,68 @@ button:hover {
 }
 
 .declaration-content .footer a {
-  color: #4CAF50;
+  color: gray;
   text-decoration: none;
 }
 
-.declaration-content .footer a:hover {
+.declaration-content .footer a:hover,
+.declaration-content .footer a:focus,
+.declaration-content .footer a:active {
+  color: black;
   text-decoration: underline;
+}
+
+/* MIT License 页面友好风格美化（参考friendly.css） */
+.license-content {
+  max-width: 877px;
+  margin: 2em auto 1.5em auto;
+  background: #f7f7f7;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  padding: 2.5em 2em 2em 2em;
+  font-family: 'Lato', Helvetica, Arial, sans-serif;
+  color: #333;
+  text-align: center;
+  position: relative;
+}
+
+.license-content h1 {
+  font-size: 2.2em;
+  font-weight: 300;
+  text-transform: uppercase;
+  display: inline-block;
+  padding-bottom: 12px;
+  border-bottom: 2px dashed #d9d9d9;
+  margin: 0 0 1.5em 0;
+  letter-spacing: 1px;
+}
+
+.license-content p {
+  text-align: left;
+  margin: 1.2em 0;
+  font-size: 1.08em;
+}
+
+.license-content p:first-of-type {
+  text-align: center;
+  font-size: 0.95em;
+}
+
+.license-content p:last-of-type {
+  border-left: 3px solid #333;
+  padding-left: 15px;
+}
+
+.license-content a {
+  color: gray;
+  text-decoration: none;
+  word-wrap: break-word;
+}
+
+.license-content a:hover,
+.license-content a:focus,
+.license-content a:active {
+  color: black;
 }
 
 /* 页脚 */
@@ -300,5 +384,17 @@ footer {
   
   button {
     padding: 10px 20px;
+  }
+}
+
+@media (min-width: 640px) {
+  .license-content h1 {
+    font-size: 2.4em;
+  }
+  .license-content {
+    font-size: 1.15em;
+  }
+  .license-content p:first-of-type {
+    font-size: 1em;
   }
 }
