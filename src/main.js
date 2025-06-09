@@ -10,6 +10,9 @@ document.addEventListener("DOMContentLoaded", function() {
   const qrTextDiv = document.getElementById('qrText');
   const updateTimeDiv = document.getElementById('updateTime');
   const autoUpdateCheckbox = document.getElementById('autoUpdate');
+  // 新增：获取解析签到码输入框和按钮
+  const parseQrTextInput = document.getElementById('parseQrTextInput');
+  const parseQrTextBtn = document.getElementById('parseQrTextBtn');
   
   // 更新间隔ID
   let updateInterval = null;
@@ -59,6 +62,13 @@ document.addEventListener("DOMContentLoaded", function() {
         saveInputValues();
       });
     });
+    
+    // 新增：解析签到码按钮事件
+    if (parseQrTextBtn) {
+      parseQrTextBtn.addEventListener('click', function() {
+        parseQrTextAndFillInputs();
+      });
+    }
   }
   
   // 保存输入值到本地存储
@@ -237,4 +247,22 @@ document.addEventListener("DOMContentLoaded", function() {
       modalOverlay.style.display = 'none';
     }
   });
+  
+  // 新增：解析签到码文本并填充输入框
+  function parseQrTextAndFillInputs() {
+    if (!parseQrTextInput) return;
+    const qrText = parseQrTextInput.value.trim();
+    // 标准格式：checkwork|id=xxx&siteId=yyy&createTime=zzz&classLessonId=kkk
+    const match = qrText.match(/id=([^&]*)&siteId=([^&]*)&createTime=[^&]*&classLessonId=([^&]*)/);
+    if (match) {
+      userIdInput.value = match[1];
+      siteIdInput.value = match[2];
+      classLessonIdInput.value = match[3];
+      // 保存并生成二维码
+      saveInputValues();
+      generateQRCode();
+    } else {
+      alert('签到码格式不正确，无法解析。');
+    }
+  }
 });
