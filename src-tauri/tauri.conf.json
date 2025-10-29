@@ -1,63 +1,52 @@
 {
-"build": {
-  "beforeBuildCommand": "",
-  "beforeDevCommand": "",
-  "devPath": "../src",
-  "distDir": "../src"
-},
-  "package": {
-    "productName": "签到码生成器",
-    "version": "1.1.0"
+  "$schema": "https://schema.tauri.app/config/2",
+  "identifier": "com.loopybrainie.qrgenerator",
+  "productName": "签到码生成器",
+  "version": "1.1.0",
+  "build": {
+  "beforeDevCommand": "npm run dev",
+  "beforeBuildCommand": "npm run build",
+  "devUrl": "http://127.0.0.1:5173",
+    "frontendDist": "../dist"
   },
-  "tauri": {
-    "allowlist": {
-      "all": false,
-      "shell": {
-        "all": false,
-        "open": true
-      }
-    },
-    "bundle": {
-      "active": true,
-      "identifier": "com.loopybrainie.qrgenerator",
-      "icon": [
-        "icons/icon (16_16).png",
-        "icons/icon (24_24).png",
-        "icons/icon (32_32).png",
-        "icons/icon (48_48).png",
-        "icons/icon (64_64).png",
-        "icons/icon (96_96).png",
-        "icons/icon (128_128).png",
-        "icons/icon (256_256).png",
-        "icons/icon (512_512).png",
-        "icons/icon.ico"
-      ],
-      "resources": [
-        "../LICENSE",
-        "../README.md",
-        "../Software_Usage_Declaration.html",
-        "../Software_Usage_Declaration_zh.html"
-      ],
-      "windows": {
-        "wix": {
-          "language": "zh-CN"
-        }
-      }
-    },
+  "app": {
     "security": {
       "csp": null
     },
-    "updater": {
-      "active": false
-    },
     "windows": [
       {
+        "title": "签到码生成器",
         "fullscreen": false,
         "resizable": true,
-        "title": "签到码生成器",
         "width": 960,
         "height": 720
       }
     ]
+  },
+  "bundle": {
+    "active": true,
+    "icon": [
+      "icons/icon (16_16).png",
+      "icons/icon (24_24).png",
+      "icons/icon (32_32).png",
+      "icons/icon (48_48).png",
+      "icons/icon (64_64).png",
+      "icons/icon (96_96).png",
+      "icons/icon (128_128).png",
+      "icons/icon (256_256).png",
+      "icons/icon (512_512).png",
+      "icons/icon.ico"
+    ],
+    "resources": [
+      "../LICENSE",
+      "../README.md",
+      "../Software_Usage_Declaration.html",
+      "../Software_Usage_Declaration_zh.html"
+    ],
+    "windows": {
+      "wix": {
+        "language": "zh-CN"
+      }
+    }
   }
 }

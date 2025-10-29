@@ -5,12 +5,21 @@
   "type": "module",
   "description": "签到码生成器应用",
   "scripts": {
+  "dev": "vite --host 127.0.0.1 --port 5173",
+    "build": "vite build",
+    "preview": "vite preview",
     "tauri": "tauri",
-    "dev": "tauri dev",
-    "build": "tauri build",
-    "clean": "tauri clean"
+    "tauri:dev": "tauri dev",
+    "tauri:build": "tauri build",
+    "tauri:clean": "tauri clean"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^2.0.0"
   },
   "devDependencies": {
-    "@tauri-apps/cli": "^1.5.0"
+    "@tauri-apps/cli": "^2.0.0",
+    "@types/node": "^20.14.10",
+    "typescript": "^5.5.4",
+    "vite": "^7.1.12"
   }
 }
