@@ -1,6 +1,12 @@
 import { invoke } from "@tauri-apps/api/core";
 import "./styles.css";
 
+// 响应类型定义
+interface HandleRequestResponse {
+  result?: unknown;
+  error?: string;
+}
+
 interface QRCodeOptions {
   text: string;
   width: number;
@@ -50,6 +56,7 @@ interface ModalRefs {
 
 interface AppState {
   timer: IntervalHandle;
+  modalAbortController: AbortController | null;
 }
 
 interface FormValues {
@@ -64,6 +71,43 @@ interface ParsedQrText {
   classLessonId: string;
 }
 
+// 配置常量
+const CONFIG = {
+  AUTO_UPDATE_INTERVAL: 5000,
+  QR_CODE_WIDTH: 256,
+  QR_CODE_HEIGHT: 256,
+} as const;
+
+// Toast 通知容器
+function createToastContainer(): HTMLElement {
+  const container = document.createElement("div");
+  container.id = "toast-container";
+  container.className = "toast-container";
+  document.body.appendChild(container);
+  return container;
+}
+
+function showToast(message: string, type: "error" | "success" | "info" = "info"): void {
+  const container = document.getElementById("toast-container") || createToastContainer();
+  const toast = document.createElement("div");
+  toast.className = `toast toast-${type}`;
+  toast.textContent = message;
+
+  container.appendChild(toast);
+
+  // 动画显示
+  requestAnimationFrame(() => {
+    toast.classList.add("toast-show");
+  });
+
+  // 3秒后自动移除
+  setTimeout(() => {
+    toast.classList.remove("toast-show");
+    toast.classList.add("toast-hide");
+    setTimeout(() => toast.remove(), 300);
+  }, 3000);
+}
+
 const STORAGE_KEYS = {
   userId: "qr_userId",
   siteId: "qr_siteId",
@@ -74,11 +118,11 @@ document.addEventListener("DOMContentLoaded", () => {
   try {
     const refs = queryFormRefs();
     const modalRefs = queryModalRefs();
-    const state: AppState = { timer: null };
+    const state: AppState = { timer: null, modalAbortController: null };
 
     const savedValues = restoreSavedValues(refs);
     registerFormHandlers(refs, state);
-    registerModalHandlers(modalRefs);
+    registerModalHandlers(modalRefs, state);
 
     if (savedValues) {
       void generateQrCode(refs, state, savedValues);
@@ -121,7 +165,7 @@ function registerFormHandlers(refs: FormRefs, state: AppState): void {
     event.preventDefault();
     const values = collectFormValues(refs);
     if (!values) {
-      alert("请填写所有必填字段");
+      showToast("请填写所有必填字段", "error");
       return;
     }
     void generateQrCode(refs, state, values);
@@ -146,30 +190,39 @@ function registerFormHandlers(refs: FormRefs, state: AppState): void {
   });
 }
 
-function registerModalHandlers(refs: ModalRefs): void {
+function registerModalHandlers(refs: ModalRefs, state: AppState): void {
+  // 清理旧的监听器
+  if (state.modalAbortController) {
+    state.modalAbortController.abort();
+  }
+
+  const abortController = new AbortController();
+  state.modalAbortController = abortController;
+  const { signal } = abortController;
+
   refs.declarationLink.addEventListener("click", (event) => {
     event.preventDefault();
     openModal(refs, refs.declarationTemplate);
-  });
+  }, { signal });
 
   refs.licenseLink.addEventListener("click", (event) => {
     event.preventDefault();
     openModal(refs, refs.licenseTemplate);
-  });
+  }, { signal });
 
-  refs.closeButton.addEventListener("click", () => closeModal(refs));
+  refs.closeButton.addEventListener("click", () => closeModal(refs), { signal });
 
   refs.overlay.addEventListener("click", (event) => {
     if (event.target === refs.overlay) {
       closeModal(refs);
     }
-  });
+  }, { signal });
 
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && isModalOpen(refs)) {
       closeModal(refs);
     }
-  });
+  }, { signal });
 }
 
 function restoreSavedValues(refs: FormRefs): FormValues | null {
@@ -190,7 +243,7 @@ function restoreSavedValues(refs: FormRefs): FormValues | null {
 
 async function generateQrCode(refs: FormRefs, state: AppState, values: FormValues): Promise<void> {
   try {
-    const qrText = await buildQrText(values);
+    const qrText = await buildQrTextWithYaml(values);
     refs.qrText.textContent = qrText;
     refs.updateTime.textContent = `最后更新: ${new Date().toLocaleString()}`;
     renderQrCode(refs.qrcode, qrText);
@@ -203,16 +256,40 @@ async function generateQrCode(refs: FormRefs, state: AppState, values: FormValue
   }
 }
 
-async function buildQrText(values: FormValues): Promise<string> {
+/// 使用 YAML 数据格式构建 QR 码（新的数据流转方式）
+/// Frontend (TS) → handle_request (YAML) → Rhai Engine → Rust Core
+async function buildQrTextWithYaml(values: FormValues): Promise<string> {
   try {
-    return await invoke<string>("generate_qr_code", {
+    // 构建 YAML 格式的数据
+    const yamlData = {
       id: values.userId,
-      siteId: values.siteId,
-      classLessonId: values.classLessonId,
+      site_id: values.siteId,
+      class_lesson_id: values.classLessonId,
+    };
+
+    // 使用 handle_request 命令，指定脚本名称
+    const response = await invoke<HandleRequestResponse>("handle_request", {
+      input: {
+        script: "process_qr",
+        data: yamlData,
+      },
     });
+
+    if (response.error) {
+      throw new Error(response.error);
+    }
+
+    if (response.result && typeof response.result === "object") {
+      const result = response.result as Record<string, unknown>;
+      if (typeof result.qr_data === "string") {
+        return result.qr_data;
+      }
+    }
+
+    throw new Error("无效的响应格式");
   } catch (error) {
     const reason = error instanceof Error ? error.message : JSON.stringify(error);
-    console.error("调用后端失败:", error);
+    console.error("调用后端(YAML模式)失败:", error);
     throw new Error(`无法调用后端，请确认已通过桌面应用运行。原因: ${reason}`);
   }
 }
@@ -221,8 +298,8 @@ function renderQrCode(container: HTMLElement, text: string): void {
   container.innerHTML = "";
   new QRCode(container, {
     text,
-    width: 256,
-    height: 256,
+    width: CONFIG.QR_CODE_WIDTH,
+    height: CONFIG.QR_CODE_HEIGHT,
     colorDark: "#000000",
     colorLight: "#ffffff",
     correctLevel: QRCode.CorrectLevel.H,
@@ -232,13 +309,13 @@ function renderQrCode(container: HTMLElement, text: string): void {
 function handleQrTextParsing(refs: FormRefs, state: AppState): void {
   const rawText = refs.parseInput.value.trim();
   if (!rawText) {
-    alert("请输入签到码文本");
+    showToast("请输入签到码文本", "error");
     return;
   }
 
   const parsed = parseQrText(rawText);
   if (!parsed) {
-    alert("签到码格式不正确，无法解析。");
+    showToast("签到码格式不正确，无法解析。", "error");
     return;
   }
 
@@ -320,7 +397,7 @@ function startAutoUpdate(refs: FormRefs, state: AppState): void {
     if (values) {
       void generateQrCode(refs, state, values);
     }
-  }, 5000);
+  }, CONFIG.AUTO_UPDATE_INTERVAL);
 }
 
 function stopAutoUpdate(state: AppState): void {

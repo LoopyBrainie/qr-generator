@@ -1,11 +1,15 @@
 [package]
 name = "qr-generator"
-version = "2.0.0"
+version = "2.1.0"
 description = "签到码生成器"
 authors = ["LoopyBrainie@Brra1n0"]
 license = "../LICENSE"
 repository = "https://github.com/LoopyBrainie/qr-generator"
 edition = "2021"
+
+[lib]
+name = "qr_generator_lib"
+crate-type = ["lib", "cdylib", "staticlib"]
 
 [build-dependencies]
 tauri-build = { version = "2", features = [] }
@@ -14,9 +18,11 @@ tauri-build = { version = "2", features = [] }
 tauri = { version = "2", features = [] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
+serde_yaml = "0.9"
 chrono = "0.4"
 num-bigint = "0.4"
 num-traits = "0.2"
+rhai = { version = "1.0", features = ["sync", "serde"] }
 
 [features]
 default = []

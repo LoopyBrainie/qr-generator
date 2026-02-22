@@ -398,3 +398,47 @@ footer {
     font-size: 1em;
   }
 }
+
+/* Toast 通知样式 */
+.toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.toast {
+  padding: 12px 20px;
+  border-radius: 6px;
+  color: white;
+  font-size: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  transform: translateX(100%);
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.toast-show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.toast-hide {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.toast-error {
+  background-color: #e74c3c;
+}
+
+.toast-success {
+  background-color: #27ae60;
+}
+
+.toast-info {
+  background-color: #3498db;
+}
